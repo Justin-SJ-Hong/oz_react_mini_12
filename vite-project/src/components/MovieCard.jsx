@@ -5,7 +5,7 @@ export default function MovieCard({data}) {
     const baseUrl = import.meta.env.VITE_BASE_URL;
     return (
         <>
-            <Link to='/details'>
+            <Link to={`/details/${data.id}`}>
                 <div className="card">
                     <div className="poster">
                         <img src={`${baseUrl}${data.backdrop_path}`} alt={`${data.title}`} />

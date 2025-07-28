@@ -16,7 +16,6 @@ export default function NavBar() {
           <button className="signup">회원가입</button>
         </div>
       </header>
-      <hr />
     </>
   );
 }
