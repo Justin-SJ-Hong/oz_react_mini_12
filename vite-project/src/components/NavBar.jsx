@@ -1,13 +1,23 @@
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import '../styles/NavBar.css';
 import { useEffect, useState } from 'react';
 import useDebounce from '../hooks/useDebounce';
+import defaultAvatar from '../assets/default.png';
+import { supabase } from '../lib/supabaseClient';
+import { useUserStore } from '../store/userStore';
 
 export default function NavBar() {
+  const user = useUserStore((state) => state.user);
+  const clearUser = useUserStore((state) => state.clearUser);
+
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [user, setUser] = useState(null);
+  const [click, setClick] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const debouncedValue = useDebounce(inputValue, 1000); // 0.5초 디바운스
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
   // const [_, setSearchParams] = useSearchParams();
+  const location = useLocation();
   const navigate = useNavigate();
 
   // useEffect(() => {
@@ -18,13 +28,47 @@ export default function NavBar() {
   //     setSearchParams({});
   //   }
   // }, [debouncedValue, setSearchParams, navigate]);
+
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem('user');
+  //   if (storedUser) {
+  //     setUser(JSON.parse(storedUser));
+  //     setIsLoggedIn(true);
+  //   } else {
+  //     setUser(null);
+  //     setIsLoggedIn(false);
+  //   }
+  // }, []);
+
+
+
+  // 로그인 정보 불러오기
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem('user');
+  //   if (storedUser) {
+  //     setUser(JSON.parse(storedUser));
+  //   }
+  // }, []);
+
+  const handleClick = () => setClick(prev => !prev);
+
+  // 로그아웃 처리
+  const handleLogout = async () => {
+    await supabase.auth.signOut(); // 🔥 인증 세션도 종료
+    localStorage.removeItem('user');
+    navigate('/');
+    window.location.reload();
+  };
+
   useEffect(() => {
-    if (debouncedValue.trim()) {
-      navigate(`/?query=${encodeURIComponent(debouncedValue)}`);
-    } else {
-      navigate(`/`);
+    if(location.pathname === '/') {
+      if (debouncedValue.trim()) {
+        navigate(`/?query=${encodeURIComponent(debouncedValue)}`);
+      } else {
+        navigate(`/`);
+      }
     }
-  }, [debouncedValue]);
+  }, [debouncedValue, location.pathname, navigate]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -49,12 +93,46 @@ export default function NavBar() {
           onChange={(e) => setInputValue(e.target.value)}
         />
       </div>
+      <nav>
+        <div>
+          {user
+            ? `환영합니다, ${user.displayName || user.email}`
+            : '로그인하지 않았습니다.'}
+        </div>
+      </nav>
       <div className="actions">
         <button className='darkButton' onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
-        <button className="login">로그인</button>
-        <button className="signup">회원가입</button>
+        {user ? (
+          <div className="profile-section">
+            {/* <img
+              src={user.avatarUrl || defaultAvatar}
+              alt="avatar"
+              className="avatar"
+              onClick={handleLogout}
+              title="클릭 시 로그아웃"
+            /> */}
+            <img
+              src={user.avatarUrl || defaultAvatar}
+              alt="avatar"
+              className="avatar"
+              onClick={handleClick}
+              title="클릭 시 메뉴열기"
+            />
+            {click && (
+              <ul className='profile-menu'>
+                <li onClick={() => navigate('/mypage')}>마이페이지</li>
+                <li onClick={handleLogout}>로그아웃</li>
+              </ul>
+            )}
+          </div>
+        ) : (
+          <div className="auth-buttons">
+            <button className="login" onClick={() => navigate('/login')}>로그인</button>
+            <button className="signup" onClick={() => navigate('/signup')}>회원가입</button>
+          </div>
+        )}
       </div>
     </header>
   );
