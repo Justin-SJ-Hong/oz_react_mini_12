@@ -1,0 +1,171 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  color: var(--text-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--card-bg);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  z-index: 1000;
+}
+
+.logo a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #facc15; /* 노란색 */
+}
+
+.search {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin: 0 24px;
+}
+
+.search input {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  width: 100%;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+}
+
+.search input::placeholder {
+  color: var(--text-color);
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.actions button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.darkButton {
+  background-color: var(--dark-color);
+}
+
+.login {
+  background-color: var(--login-color); /* 파랑 */
+  color: var(--text-color);
+}
+
+.signup {
+  background-color: var(--signup-color); /* 초록 */
+  color: var(--text-color);
+}
+
+.profile-section img {
+  height: 44px;
+  width: 44px;
+  border-radius: 22px;
+}
+
+.profile-menu {
+  position: absolute;
+  top: 44px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+  width: 140px;
+  z-index: 10;
+}
+
+.is-login {
+  margin-right: 20px;
+}
+
+.profile-menu li {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.profile-menu li:hover {
+  background-color: #f0f0f0;
+}
+
+/* 태블릿 이하 (<= 1024px) */
+@media (max-width: 1024px) {
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  .search {
+    margin: 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .search input {
+    width: 100%;
+    max-width: none;
+  }
+
+  .actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .actions button {
+    min-width: 100px;
+    flex: 1 1 auto;
+  }
+}
+
+/* 모바일 전용 (<= 480px) */
+@media (max-width: 480px) {
+  .logo a {
+    font-size: 1.25rem;
+  }
+
+  .actions button {
+    font-size: 0.875rem;
+    padding: 6px 10px;
+  }
+
+  .navbar {
+    gap: 8px;
+  }
+}
+
+
+/* @media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .search input {
+    width: 100%;
+  }
+
+  .actions {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+} */

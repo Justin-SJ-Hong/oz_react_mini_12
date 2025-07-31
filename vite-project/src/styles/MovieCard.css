@@ -1,0 +1,59 @@
+.card {
+    margin: 10px;
+    height: 350px;
+    width: 250px;
+    border-radius: 12px;
+    /* position: relative;
+    width: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff; */
+}
+
+.poster {
+    position: relative;
+}
+
+.poster > img {
+    height: 250px;
+    width: 250px;
+    border-radius: 12px;
+    /* width: 100%;
+    height: auto;
+    display: block; */
+}
+
+.title > h3 {
+    height: 50px;
+    font-weight: bold;
+}
+
+.rated {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.rated > h5 {
+    font-size: 1rem;
+    color: #ff9900;
+    background-color: #fff3cd;
+    padding: 6px 12px;
+}
+
+.bookmark button {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 24px;
+    background: transparent;
+    border: none;
+    color: gold;
+    cursor: pointer;
+    z-index: 10;
+    text-shadow: 0 0 3px black;
+}
+
+.bookmark:hover {
+    transform: scale(1.2);
+}

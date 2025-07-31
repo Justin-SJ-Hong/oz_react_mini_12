@@ -1,0 +1,134 @@
+.movieDetail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding: 24px;
+  background-color: var(--detail-color);
+  color: var(--text-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.detailPoster {
+  flex-shrink: 0;
+  width: 280px;
+}
+
+.detailPoster img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.detailContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detailTitleRating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.detailTitle h3 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin: 0;
+  color: var(--text-color);
+}
+
+.detailRate h3 {
+  font-size: 1.5rem;
+  color: #ff9900;
+  background-color: #fff3cd;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.detailGenres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.detailGenres span {
+  background-color: var(--genre-color);
+  color: var(--text-color);
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+}
+
+.detailOverview p {
+  line-height: 1.6;
+  color: var(--text-color);
+  font-size: 1rem;
+  white-space: pre-line;
+}
+
+/* 태블릿 (768px 이하) */
+@media (max-width: 768px) {
+  .movieDetail {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 16px;
+    gap: 24px;
+  }
+
+  .detailPoster {
+    width: 60%;
+    max-width: 300px;
+  }
+
+  .detailContent {
+    width: 100%;
+  }
+
+  .detailTitleRating {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .detailTitle h3 {
+    font-size: 1.5rem;
+  }
+
+  .detailRate h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* 모바일 (480px 이하) */
+@media (max-width: 480px) {
+  .movieDetail {
+    padding: 16px 12px;
+    gap: 20px;
+  }
+
+  .detailPoster {
+    width: 100%;
+  }
+
+  .detailTitle h3 {
+    font-size: 1.25rem;
+  }
+
+  .detailRate h3 {
+    font-size: 1.125rem;
+    padding: 4px 10px;
+  }
+
+  .detailGenres span {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+
+  .detailOverview p {
+    font-size: 0.95rem;
+  }
+}

@@ -1,0 +1,26 @@
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.input-label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.input-field {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.input-field.input-error {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  margin-top: 6px;
+  font-size: 0.875rem;
+}

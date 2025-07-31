@@ -1,0 +1,13 @@
+.main {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;  /* 수평 정렬 */
+    align-items: center;      /* 수직 정렬 */
+    min-height: 100vh;        /* 화면 전체 높이 확보 */
+}
+
+@media (max-width: 600px) {
+    .main {
+        margin-top: 7rem;
+    }
+}

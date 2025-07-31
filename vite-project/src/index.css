@@ -1,0 +1,98 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --card-bg: #f0f0f0;
+  --input-bg: #ffffff;
+  --border-color: #cccccc;
+  --link-color: #aaaaaa;
+  --login-color: #3b82f6;
+  --signup-color: #10b981;
+  --dark-color: #9a0ad7;
+  --detail-color: #cccccc;
+  --genre-color: #e2e6ea;
+}
+
+/* 다크모드 덮어쓰기 */
+.dark {
+  --bg-color: #1e1e1e;
+  --text-color: #18e811;
+  --card-bg: #2a2a2a;
+  --input-bg: #333333;
+  --border-color: #555555;
+  --link-color: #1b9a17;
+  --login-color: #204176;
+  --signup-color: #144a14;
+  --dark-color: #08c4f8;
+  --detail-color: #0f0f0f;
+  --genre-color: #717375;
+}
+
+a {
+  font-weight: 500;
+  color: var(--text-color);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--link-color);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: var(--link-color);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: var(--link-color);
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

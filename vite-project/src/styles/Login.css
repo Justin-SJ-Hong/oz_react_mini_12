@@ -1,0 +1,80 @@
+.my-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 화면 전체 높이 */
+    width: 100vw;
+    background-color: var(--detail-color); /* 배경색 */
+    flex-direction: column;
+}
+
+.login-part {
+    width: 100%;
+    max-width: 400px;
+    padding: 32px;
+    margin: 32px;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-part h1 {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: xx-large;
+}
+
+.login-part form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+}
+
+.login-part form label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.login-part input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    border-radius: 4px;
+    width: 300px;
+}
+
+.login-part input::placeholder {
+    color: var(--text-color);
+}
+
+.login-part button {
+    display: flex;
+    justify-content: center;
+    padding: 12px;
+    font-size: 16px;
+    background-color: var(--login-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.login-part button:hover {
+    background-color: #0056b3;
+}
+
+.begin-part {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
