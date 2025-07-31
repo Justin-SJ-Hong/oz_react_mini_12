@@ -54,10 +54,40 @@ export default function NavBar() {
 
   // 로그아웃 처리
   const handleLogout = async () => {
-    await supabase.auth.signOut(); // 🔥 인증 세션도 종료
+    // await supabase.auth.signOut(); // 🔥 인증 세션도 종료
+    // clearUser();
+    // localStorage.removeItem('user');
+    // navigate('/');
+    // window.location.reload();
+    const { clearUser } = useUserStore.getState();
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    // 1. 로그인 제공자 자동 감지
+    const provider = user?.app_metadata?.provider || 'email';
+
+    // 2. Supabase 로그아웃
+    await supabase.auth.signOut();
+    clearUser();
     localStorage.removeItem('user');
-    navigate('/');
-    window.location.reload();
+
+    const origin = window.location.origin;
+
+    // 3. 소셜 로그아웃 URL로 리디렉션
+    if (provider === 'google') {
+      const googleLogout = `https://accounts.google.com/Logout?continue=https://appengine.google.com/_ah/logout?continue=${origin}`;
+      window.location.href = googleLogout;
+    } else if (provider === 'kakao') {
+      const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_REST_API_KEY; // 🔁 여기에 본인의 키 넣기
+      const kakaoLogout = `https://kauth.kakao.com/oauth/logout?client_id=${KAKAO_CLIENT_ID}&logout_redirect_uri=${origin}`;
+      window.location.href = kakaoLogout;
+    } else {
+      // 일반 이메일 로그인은 그냥 홈으로 리디렉션
+      navigate('/');
+      window.location.reload();
+    }
   };
 
   useEffect(() => {
@@ -94,7 +124,7 @@ export default function NavBar() {
         />
       </div>
       <nav>
-        <div>
+        <div className='is-login'>
           {user
             ? `환영합니다, ${user.displayName || user.email}`
             : '로그인하지 않았습니다.'}

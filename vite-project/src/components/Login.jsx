@@ -53,7 +53,7 @@ export default function Login() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-          redirectTo: 'http://localhost:5173', // 실제 배포 주소로 변경 필요
+          redirectTo: 'http://localhost:5173/auth/callback', // 실제 배포 주소로 변경 필요
         },
       });
       if (error) throw error;

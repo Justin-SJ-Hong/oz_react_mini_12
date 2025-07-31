@@ -11,6 +11,8 @@ import Signup from './components/Signup'
 import { useEffect, useState } from 'react'
 import { supabase } from './lib/supabaseClient'
 import { useUserStore } from './store/userStore'
+import AuthCallback from './components/AuthCallback'
+import MyPage from './components/MyPage'
 
 function App() {
   // const [list, setList] = useState([]);
@@ -40,6 +42,49 @@ function App() {
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
   const clearUser = useUserStore((state) => state.clearUser);
+
+  const checkSupabaseSession = async () => {
+    const { data, error } = await supabase.auth.getSession();
+
+    if (error) {
+      console.error('❌ 세션 조회 에러:', error.message);
+      return;
+    }
+
+    if (data?.session) {
+      console.log('✅ 현재 Supabase 세션:', data.session);
+      console.log('🪪 사용자 정보:', data.session.user);
+      console.log('🔑 액세스 토큰:', data.session.access_token);
+      console.log('🔄 리프레시 토큰:', data.session.refresh_token);
+      console.log('🌍 공급자(provider):', data.session.user.app_metadata?.provider);
+    } else {
+      console.log('🕳️ 세션 없음 (로그아웃 상태)');
+    }
+  };
+
+  useEffect(() => {
+    checkSupabaseSession();
+  }, []);
+
+  useEffect(() => {
+    const checkProviderToken = async () => {
+      const { data: { session }, error } = await supabase.auth.getSession();
+      if (error) {
+        console.error('세션 오류:', error);
+        return;
+      }
+
+      const provider = session?.user?.app_metadata?.provider;
+      const token = session?.provider_token;
+
+      console.log('🔍 OAuth Provider:', provider);
+      console.log('🔐 Provider Token:', token);
+    };
+
+    checkProviderToken();
+  }, []);
+
+
 
   useEffect(() => {
     // ✅ 최초 마운트 시, 새로고침 후에도 로그인 유지 확인
@@ -112,8 +157,9 @@ function App() {
           <Route path='details/:id' element={<MovieDetail />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path='mypage' element={<MyPage />} />
+          <Route path='auth/callback' element={<AuthCallback />} />
         </Route>
-        
       </Routes>
     </>
   )

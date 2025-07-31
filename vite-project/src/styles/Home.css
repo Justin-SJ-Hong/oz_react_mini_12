@@ -23,6 +23,19 @@
   animation: pulse 1.5s infinite ease-in-out;
 }
 
+.spinner {
+  text-align: center;
+  margin: 1rem;
+}
+
+.end-msg {
+  text-align: center;
+  color: gray;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+
 @keyframes pulse {
   0% {
     background-color: #e0e0e0;
